@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_30"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/text_style"
+        android:layout_width="@dimen/dp_170"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_round_button_10"
+        android:gravity="center"
+        android:maxLines="1"
+        android:paddingLeft="@dimen/dp_30"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_30"
+        android:paddingBottom="@dimen/dp_10"
+        android:singleLine="true" />
+
+    <com.android.soapy.weight.CustomNumericKeyboard
+        android:id="@+id/number_keyboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30" />
+</LinearLayout>

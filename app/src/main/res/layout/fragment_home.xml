@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fff5e5"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_header"
+        layout="@layout/header_layout" />
+
+    <TextView
+        android:layout_width="@dimen/dp_350"
+        android:layout_height="@dimen/dp_150"
+        android:layout_marginTop="@dimen/dp_60"
+        android:background="@drawable/dashed_border"
+        android:fontFamily="@font/futura_extra_bold"
+        android:gravity="center"
+        android:text="Insert Video Here"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dp_35"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+<!--    <FrameLayout-->
+<!--        android:id="@+id/layout_top"-->
+<!--        android:layout_width="@dimen/dp_350"-->
+<!--        android:layout_height="@dimen/dp_150"-->
+<!--        android:layout_marginTop="@dimen/dp_60"-->
+<!--        android:background="#000">-->
+
+        <cn.jzvd.JzvdStd
+            android:id="@+id/videoView"
+            android:layout_width="@dimen/dp_400"
+            android:layout_height="@dimen/dp_200"
+            android:layout_marginTop="@dimen/dp_60" />
+<!--    </FrameLayout>-->
+
+    <TextView
+        android:id="@+id/tv_start"
+        style="@style/text_style"
+        android:layout_width="@dimen/dp_240"
+        android:layout_marginTop="@dimen/dp_80"
+        android:layout_marginBottom="@dimen/dp_200"
+        android:background="@drawable/shape_round_button_10"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_15"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="Touch to Start" />
+
+
+</LinearLayout>

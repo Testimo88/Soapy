@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fff5e5"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/header_layout" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/text_style"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="Step 2: Select Shampoo"
+        android:textColor="@color/black" />
+
+    <LinearLayout
+        android:id="@+id/ll_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_30"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_normal"
+                style="@style/btn_time_style"
+                android:layout_marginRight="@dimen/dp_25"
+                android:text="Normal"/>
+
+            <TextView
+                android:id="@+id/tv_sensitive"
+                style="@style/btn_time_style"
+                android:text="Sensitive\nSkin +$2" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/ll_review_order"
+        layout="@layout/layout_review_order"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/ll_select_payment"
+        layout="@layout/layout_select_payment"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include
+        android:id="@+id/ll_bottom"
+        layout="@layout/bottom_layout" />
+
+</LinearLayout>

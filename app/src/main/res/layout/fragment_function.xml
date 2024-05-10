@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fff5e5"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/header_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/text_style"
+            android:text="Time Remaining "
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/chronometer"
+            style="@style/text_style"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_btn_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/rb_rinse"
+            style="@style/function_btn_style"
+            android:text="Rinse" />
+
+        <TextView
+            android:id="@+id/rb_shampoo"
+            style="@style/function_btn_style"
+            android:text="Shampoo" />
+
+        <TextView
+            android:id="@+id/rb_shampoo_senior"
+            style="@style/function_btn_style"
+            android:text="Shampoo"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/rb_conditioner"
+            style="@style/function_btn_style"
+            android:text="Conditioner" />
+
+        <TextView
+            android:id="@+id/rb_conditioner_senior"
+            style="@style/function_btn_style"
+            android:text="Conditioner"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/rb_blow"
+            style="@style/function_btn_style"
+            android:text="Blow" />
+
+        <TextView
+            android:id="@+id/rb_disinfect"
+            style="@style/function_btn_style"
+            android:text="Disinfect" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_75"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginRight="@dimen/dp_75"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_add_time"
+            style="@style/function_btn_style"
+            android:background="@drawable/shape_round_green_button"
+            android:text="Add Time" />
+
+        <TextView
+            android:id="@+id/tv_pause"
+            style="@style/function_btn_style"
+            android:background="@drawable/shape_round_red_button"
+            android:text="Pause" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/ll_select_payment"
+        layout="@layout/layout_select_payment"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/ll_custom_container"
+        layout="@layout/layout_number_keyboard" />
+
+    <include
+        android:id="@+id/ll_insert_card"
+        layout="@layout/layout_insert_card"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/ll_insert_cash"
+        layout="@layout/layout_insert_cash"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include
+        android:id="@+id/ll_function_bottom"
+        layout="@layout/bottom_layout" />
+
+</LinearLayout>

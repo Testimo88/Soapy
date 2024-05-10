@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Soapy</string>
+    <string name="wash_duration">Wash Duration: %s mins</string>
+    <string name="total_money">Total：$%s</string>
+    <string name="remaining_time">Time Remaining : %s min</string>
+    <string name="pay_timeout">Payment Timeout</string>
+</resources>

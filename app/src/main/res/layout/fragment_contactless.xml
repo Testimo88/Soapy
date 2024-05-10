@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_fff5e5"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/header_layout" />
+
+    <include
+        android:id="@+id/ll_insert_card"
+        layout="@layout/layout_insert_card" />
+
+    <include
+        android:id="@+id/ll_insert_cash"
+        layout="@layout/layout_insert_cash" />
+
+    <TextView
+        android:id="@+id/tv_countdown"
+        style="@style/btn_time_style"
+        android:layout_marginTop="@dimen/dp_30"
+        android:text="5"
+        android:textStyle="bold"
+        android:textSize="@dimen/sp_30"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include
+        android:id="@+id/ll_bottom"
+        layout="@layout/bottom_layout" />
+
+</LinearLayout>
