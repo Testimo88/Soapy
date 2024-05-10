@@ -2,7 +2,7 @@
 //
 //import android.content.SharedPreferences;
 //import android.content.res.Resources;
-//import soapy.serialport.SerialPortFinder;
+//import android.serialport.SerialPortFinder;
 //import android.text.TextUtils;
 //
 //

@@ -1,6 +1,7 @@
 package com.licheedev.modbus4android;
 
-//import soapy.serialport.SerialPort;
+import android.serialport2.SerialPort;
+
 import com.serotonin.modbus4j.serial.SerialPortWrapper;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -8,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import soapy.serialport.SerialPort;
+
 
 /**
  * modbus的Android串口实现
@@ -70,7 +71,7 @@ public class AndroidSerialPortWrapper implements SerialPortWrapper {
     @Override
     public void open() throws Exception {
 
-        mSerialPort = SerialPort //
+        mSerialPort = SerialPort  //
             .newBuilder(mDevice, mBaudRate)
             .parity(mParity)
             .dataBits(mDataBits)

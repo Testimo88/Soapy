@@ -9,7 +9,16 @@ import android.widget.Button;
 
 import com.android.soapy.base.BaseActivity;
 import com.android.soapy.databinding.ActivityTestBinding;
+import com.android.soapy.modbus.ModbusManager;
+import com.android.soapy.utils.ByteUtil;
 import com.android.soapy.vm.MainViewModel;
+import com.licheedev.modbus4android.ModbusCallback;
+import com.licheedev.modbus4android.ModbusObserver;
+import com.serotonin.modbus4j.msg.ReadHoldingRegistersResponse;
+import com.serotonin.modbus4j.msg.WriteRegisterResponse;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
 public class TestOneActivity extends BaseActivity<ActivityTestBinding, MainViewModel> {
@@ -130,6 +139,46 @@ public class TestOneActivity extends BaseActivity<ActivityTestBinding, MainViewM
         convertToBinary(data);
         int write = viewModel.write(convertToBinary(data).getBytes());
         Log.d(TAG, "write: " + write);
+
+        //// 普通写法
+//        ModbusManager.get()
+//            .readHoldingRegisters(1, 64, 1,
+//                new ModbusCallback<ReadHoldingRegistersResponse>() {
+//                    @Override
+//                    public void onSuccess(
+//                        ReadHoldingRegistersResponse readHoldingRegistersResponse) {
+//                        byte[] data = readHoldingRegistersResponse.getData();
+//                        Log.d(TAG, "onSuccess: F03读取：" + ByteUtil.bytes2HexStr(data) + "\n");
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Throwable tr) {
+//                        Log.i(TAG,"F03", tr);
+//                    }
+//
+//                    @Override
+//                    public void onFinally() {
+//
+//                    }
+//                });
+        ModbusManager.get()
+                .writeSingleRegister(1, 64, data,
+                        new ModbusCallback<WriteRegisterResponse>() {
+                            @Override
+                            public void onSuccess(WriteRegisterResponse writeRegisterResponse) {
+                                Log.d(TAG, "onSuccess: F06写入成功\n");
+                            }
+
+                            @Override
+                            public void onFailure(Throwable tr) {
+                                Log.i(TAG, "F06", tr);
+                            }
+
+                            @Override
+                            public void onFinally() {
+
+                            }
+                        });
     }
 
     public String convertToBinary(int number) {

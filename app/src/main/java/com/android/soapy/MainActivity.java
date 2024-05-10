@@ -47,35 +47,38 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         viewModel.readHardwareConfig();
         viewModel.getMinPayoutAmount();
 
-//
-//        SerialParam param = SerialParam.create("/dev/ttyS7", 9600) // 串口地址和波特率
-//                .setDataBits(8) // 数据位
-//                .setParity(0) // 校验位
-//                .setStopBits(1) // 停止位
-//                .setTimeout(1000)
-//                .setRetries(0);// 不重试
-//        ModbusManager.get().closeModbusMaster(); // 先关闭一下
-//        ModbusManager.get().init(param, new ModbusCallback<ModbusMaster>() {
-//            @Override
-//            public void onSuccess(ModbusMaster modbusMaster) {
-//                Toast.makeText(context, "打开成功", Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Throwable tr) {
-//                Toast.makeText(context, "打开失败", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFinally() {
-////                updateDeviceSwitchButton();
-//            }
-//        });
-//        boolean modbusOpened = ModbusManager.get().isModbusOpened();
-//        if (modbusOpened) {
-//            Log.d(TAG, "modbusOpened: " + modbusOpened);
-//        }
+
+        SerialParam param = SerialParam.create("/dev/ttyS7", 9600) // 串口地址和波特率
+                .setDataBits(8) // 数据位
+                .setParity(0) // 校验位
+                .setStopBits(1) // 停止位
+                .setTimeout(1000)
+                .setRetries(0);// 不重试
+        ModbusManager.get().closeModbusMaster(); // 先关闭一下
+        ModbusManager.get().init(param, new ModbusCallback<ModbusMaster>() {
+            @Override
+            public void onSuccess(ModbusMaster modbusMaster) {
+
+                Toast.makeText(context, "打开成功", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Throwable tr) {
+                Log.d(TAG, "onFailure: "+tr.getMessage());
+                Toast.makeText(context, "打开失败", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinally() {
+//                updateDeviceSwitchButton();
+            }
+        });
+        boolean modbusOpened = ModbusManager.get().isModbusOpened();
+        Log.d(TAG, "modbusOpened: " + modbusOpened);
+        if (modbusOpened) {
+            Log.d(TAG, "modbusOpened: " + modbusOpened);
+        }
     }
 
 
