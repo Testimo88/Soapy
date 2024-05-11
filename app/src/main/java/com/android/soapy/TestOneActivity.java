@@ -76,8 +76,8 @@ public class TestOneActivity extends BaseActivity<ActivityTestBinding, MainViewM
             }
         });
         byte[] read = viewModel.read();
-        if (read!=null){
-            Log.d(TAG, "read: "+new String(read));
+        if (read != null) {
+            Log.d(TAG, "read: " + new String(read));
         }
 
     }
@@ -136,9 +136,9 @@ public class TestOneActivity extends BaseActivity<ActivityTestBinding, MainViewM
         }
         // 这里写发送数据的逻辑，发送data即可
         Log.d(TAG, "sendBinaryData: " + data);
-        convertToBinary(data);
-        int write = viewModel.write(convertToBinary(data).getBytes());
-        Log.d(TAG, "write: " + write);
+//        convertToBinary(data);
+//        int write = viewModel.write(convertToBinary(data).getBytes());
+//        Log.d(TAG, "write: " + write);
 
         //// 普通写法
 //        ModbusManager.get()
@@ -161,24 +161,7 @@ public class TestOneActivity extends BaseActivity<ActivityTestBinding, MainViewM
 //
 //                    }
 //                });
-        ModbusManager.get()
-                .writeSingleRegister(1, 64, data,
-                        new ModbusCallback<WriteRegisterResponse>() {
-                            @Override
-                            public void onSuccess(WriteRegisterResponse writeRegisterResponse) {
-                                Log.d(TAG, "onSuccess: F06写入成功\n");
-                            }
-
-                            @Override
-                            public void onFailure(Throwable tr) {
-                                Log.i(TAG, "F06", tr);
-                            }
-
-                            @Override
-                            public void onFinally() {
-
-                            }
-                        });
+        viewModel.writeSingleRegister(data);
     }
 
     public String convertToBinary(int number) {

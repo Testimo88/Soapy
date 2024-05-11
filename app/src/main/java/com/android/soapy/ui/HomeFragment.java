@@ -16,9 +16,11 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,15 +32,19 @@ import com.android.soapy.TestOneActivity;
 import com.android.soapy.base.BaseFragment;
 import com.android.soapy.databinding.DialogInputPwdBinding;
 import com.android.soapy.databinding.FragmentHomeBinding;
+import com.android.soapy.modbus.ModbusManager;
 import com.android.soapy.utils.SPUtils;
 import com.android.soapy.vm.MainViewModel;
+import com.licheedev.modbus4android.ModbusCallback;
+import com.licheedev.modbus4android.param.SerialParam;
+import com.serotonin.modbus4j.ModbusMaster;
 
 
 /**
  * Home page
  */
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, MainViewModel> {
-
+    private static String TAG = "HomeFragment";
     private int clickCount = 0;
     private long lastClickTime = 0;
     private final long MAX_CLICK_INTERVAL = 1000; // 最大点击间隔，单位：毫秒
@@ -90,8 +96,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, MainViewMode
         binding.layoutHeader.ivBubleLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), TestOneActivity.class);
-                startActivity(intent);
+                extracted();
             }
         });
         binding.layoutHeader.ivBubleRight.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +116,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, MainViewMode
                 lastClickTime = currentTime;
             }
         });
+    }
+
+    private void extracted() {
+        Intent intent = new Intent(getActivity(), TestOneActivity.class);
+        startActivity(intent);
+    }
+
+    private void updateDeviceSwitchButton() {
+        boolean modbusOpened = ModbusManager.get().isModbusOpened();
+        Log.d(TAG, "modbusOpened: " + modbusOpened);
     }
 
     private void showDialog() {

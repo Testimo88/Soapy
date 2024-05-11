@@ -5,16 +5,22 @@ import android.content.Context;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.MutableLiveData;
 
 
+import com.android.soapy.modbus.ModbusManager;
 import com.android.soapy.utils.FragmentUtils;
 import com.android.soapy.weight.CountDownTimerExt;
+import com.licheedev.modbus4android.ModbusCallback;
+import com.licheedev.modbus4android.param.SerialParam;
 import com.lztek.toolkit.Lztek;
 import com.lztek.toolkit.SerialPort;
+import com.serotonin.modbus4j.ModbusMaster;
+import com.serotonin.modbus4j.msg.WriteRegisterResponse;
 
 import cc.uling.usdk.USDK;
 import cc.uling.usdk.board.UBoard;
@@ -281,6 +287,66 @@ public class MainViewModel extends BaseViewModel {
         getUBoard().notifyPayment(new PayReplyPara(true));
         handler.removeCallbacksAndMessages(null);
     }
+
+
+    /**
+     * 初始化Modbus串口参数
+     */
+    public void initSerialParam() {
+        SerialParam param = SerialParam.create("/dev/ttyS7", 9600) // 串口地址和波特率
+                .setDataBits(8) // 数据位
+                .setParity(0) // 校验位
+                .setStopBits(1) // 停止位
+                .setTimeout(1000)
+                .setRetries(0);// 不重试
+        ModbusManager.get().closeModbusMaster(); // 先关闭一下
+        ModbusManager.get().init(param, new ModbusCallback<ModbusMaster>() {
+            @Override
+            public void onSuccess(ModbusMaster modbusMaster) {
+
+                Log.d(TAG, "onSuccess: ModbusMaster:打开成功");
+
+            }
+
+            @Override
+            public void onFailure(Throwable tr) {
+                Log.d(TAG, "onFailure: " + tr.getMessage());
+
+            }
+
+            @Override
+            public void onFinally() {
+                boolean modbusOpened = ModbusManager.get().isModbusOpened();
+                Log.d(TAG, "modbusOpened: " + modbusOpened);
+            }
+        });
+    }
+
+
+    /**
+     * 写入数据
+     */
+    public void writeSingleRegister(int data) {
+        ModbusManager.get()
+                .writeSingleRegister(1, 100, data,
+                        new ModbusCallback<WriteRegisterResponse>() {
+                            @Override
+                            public void onSuccess(WriteRegisterResponse writeRegisterResponse) {
+                                Log.d(TAG, "onSuccess: F06写入成功\n");
+                            }
+
+                            @Override
+                            public void onFailure(Throwable tr) {
+                                Log.i(TAG, "F06", tr);
+                            }
+
+                            @Override
+                            public void onFinally() {
+
+                            }
+                        });
+    }
+
 
     /**
      * 打开工控机串口

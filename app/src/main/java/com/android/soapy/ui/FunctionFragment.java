@@ -198,20 +198,9 @@ public class FunctionFragment extends BaseFragment<FragmentFunctionBinding, Main
         }
         // 这里写发送数据的逻辑，发送data即可
         Log.d(TAG, "sendBinaryData: " + data);
-        viewModel.write(String.valueOf(data).getBytes());
-        convertToBinary(data);
+        viewModel.writeSingleRegister(data);
     }
 
-    public String convertToBinary(int number) {
-        StringBuilder binaryBuilder = new StringBuilder();
-        for (int i = 0; i < 7; i++) {
-            binaryBuilder.append((number & (1 << i)) == 0 ? '0' : '1');
-
-        }
-        Log.d(TAG, "convertToBinary: " + binaryBuilder);
-//        Log.d(TAG, "convertToBytes[]: " + Arrays.toString(binaryBuilder.toString().getBytes()));
-        return binaryBuilder.toString();
-    }
 
     private void initChronometer() {
 
