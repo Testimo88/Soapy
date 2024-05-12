@@ -61,4 +61,12 @@
         android:padding="10dp"
         app:sharedKey="Pause"
         app:textViewText="暂停" />
+    <com.android.soapy.weight.CustomLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_30"
+        android:padding="10dp"
+        app:sharedKey="UnitPrice"
+        app:editTextType="1"
+        app:textViewText="单价" />
 </LinearLayout>

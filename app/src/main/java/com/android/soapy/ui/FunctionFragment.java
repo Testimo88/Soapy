@@ -63,6 +63,7 @@ public class FunctionFragment extends BaseFragment<FragmentFunctionBinding, Main
         viewModel.lastTimerFinish.observe(this, aBoolean -> {
             if (aBoolean) {
                 alertDialog.dismiss();
+                viewModel.totalMoney=0;
                 jumpHome();
             }
         });
@@ -114,6 +115,8 @@ public class FunctionFragment extends BaseFragment<FragmentFunctionBinding, Main
     public void initView() {
         super.initView();
         binding.llFunctionBottom.icHome.setVisibility(View.GONE);
+        binding.llFunctionBottom.tvTemperature.setVisibility(View.VISIBLE);
+        binding.llFunctionBottom.tvTemperature.setText(String.format(getString(R.string.temperature), "30℃"));
         initChronometer();
         initFunctionClick();
 

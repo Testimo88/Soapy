@@ -3,6 +3,7 @@
     <declare-styleable name="CustomLayout">
         <attr name="textViewText" format="string" />
         <attr name="editTextDef" format="string" />
+        <attr name="editTextType" format="integer" />
         <attr name="sharedKey" format="string" />
     </declare-styleable>
 </resources>

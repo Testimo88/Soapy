@@ -1,5 +1,7 @@
 package com.android.soapy.vm;
 
+import static com.android.soapy.utils.Constants.UNIT_PRICE;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
@@ -13,13 +15,16 @@ import androidx.lifecycle.MutableLiveData;
 
 
 import com.android.soapy.modbus.ModbusManager;
+import com.android.soapy.utils.ByteUtil;
 import com.android.soapy.utils.FragmentUtils;
+import com.android.soapy.utils.SPUtils;
 import com.android.soapy.weight.CountDownTimerExt;
 import com.licheedev.modbus4android.ModbusCallback;
 import com.licheedev.modbus4android.param.SerialParam;
 import com.lztek.toolkit.Lztek;
 import com.lztek.toolkit.SerialPort;
 import com.serotonin.modbus4j.ModbusMaster;
+import com.serotonin.modbus4j.msg.ReadHoldingRegistersResponse;
 import com.serotonin.modbus4j.msg.WriteRegisterResponse;
 
 import cc.uling.usdk.USDK;
@@ -87,7 +92,7 @@ public class MainViewModel extends BaseViewModel {
     public MutableLiveData<Boolean> pauseTimer = new MutableLiveData<>(true);
     private SerialPort mSerialPort;
     public long millisUntilFinishedRecord;
-    private int totalMoney;
+    public int totalMoney;
 
     /**
      * 页面跳转
@@ -175,9 +180,11 @@ public class MainViewModel extends BaseViewModel {
      */
     public void calMoney(int min) {
         sensitive.setValue(false);
-        int i = min * 1;
+        //单价
+        String unit_price = (String) SPUtils.get(context, UNIT_PRICE, "1");
+        int money = min * Integer.parseInt(unit_price);
         timeLong.postValue(Long.valueOf(min * 60 * 1000L));
-        amountText.postValue(String.valueOf(i));
+        amountText.postValue(String.valueOf(money));
     }
 
     /**
@@ -328,7 +335,7 @@ public class MainViewModel extends BaseViewModel {
      */
     public void writeSingleRegister(int data) {
         ModbusManager.get()
-                .writeSingleRegister(1, 100, data,
+                .writeSingleRegister(1, 200, data,
                         new ModbusCallback<WriteRegisterResponse>() {
                             @Override
                             public void onSuccess(WriteRegisterResponse writeRegisterResponse) {
@@ -347,6 +354,31 @@ public class MainViewModel extends BaseViewModel {
                         });
     }
 
+    /**
+     * 读取数据
+     */
+    public void readHoldingRegisters() {
+        ModbusManager.get()
+            .readHoldingRegisters(1, 200, 8,
+                new ModbusCallback<ReadHoldingRegistersResponse>() {
+                    @Override
+                    public void onSuccess(
+                        ReadHoldingRegistersResponse readHoldingRegistersResponse) {
+                        byte[] data = readHoldingRegistersResponse.getData();
+                        Log.d(TAG,"F03读取：" + ByteUtil.bytes2HexStr(data));
+                    }
+
+                    @Override
+                    public void onFailure(Throwable tr) {
+                        Log.d(TAG,"F03", tr);
+                    }
+
+                    @Override
+                    public void onFinally() {
+
+                    }
+                });
+    }
 
     /**
      * 打开工控机串口
@@ -400,4 +432,6 @@ public class MainViewModel extends BaseViewModel {
             return null;
         }
     }
+
+
 }

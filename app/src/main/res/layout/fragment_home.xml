@@ -24,26 +24,26 @@
         android:textStyle="bold"
         android:visibility="gone" />
 
-<!--    <FrameLayout-->
-<!--        android:id="@+id/layout_top"-->
-<!--        android:layout_width="@dimen/dp_350"-->
-<!--        android:layout_height="@dimen/dp_150"-->
-<!--        android:layout_marginTop="@dimen/dp_60"-->
-<!--        android:background="#000">-->
+    <!--    <FrameLayout-->
+    <!--        android:id="@+id/layout_top"-->
+    <!--        android:layout_width="@dimen/dp_350"-->
+    <!--        android:layout_height="@dimen/dp_150"-->
+    <!--        android:layout_marginTop="@dimen/dp_60"-->
+    <!--        android:background="#000">-->
 
-        <cn.jzvd.JzvdStd
-            android:id="@+id/videoView"
-            android:layout_width="@dimen/dp_400"
-            android:layout_height="@dimen/dp_200"
-            android:layout_marginTop="@dimen/dp_60" />
-<!--    </FrameLayout>-->
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/videoView"
+        android:layout_width="@dimen/dp_400"
+        android:layout_height="@dimen/dp_200"
+        android:layout_marginTop="@dimen/dp_60"
+        app:use_controller="false" />
+    <!--    </FrameLayout>-->
 
     <TextView
         android:id="@+id/tv_start"
         style="@style/text_style"
         android:layout_width="@dimen/dp_240"
         android:layout_marginTop="@dimen/dp_80"
-        android:layout_marginBottom="@dimen/dp_200"
         android:background="@drawable/shape_round_button_10"
         android:gravity="center"
         android:paddingLeft="@dimen/dp_15"
@@ -51,6 +51,21 @@
         android:paddingRight="@dimen/dp_15"
         android:paddingBottom="@dimen/dp_10"
         android:text="Touch to Start" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center_horizontal"
+        android:orientation="vertical">
+    <TextView
+        style="@style/text_style"
+        android:text="Liquid level alarm"
+        android:textColor="@color/black" />
 
-
+    <com.android.soapy.weight.BinaryControlView
+        android:id="@+id/binary_control_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_15" />
+    </LinearLayout>
 </LinearLayout>

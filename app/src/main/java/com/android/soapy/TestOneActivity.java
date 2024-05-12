@@ -75,10 +75,10 @@ public class TestOneActivity extends BaseActivity<ActivityTestBinding, MainViewM
                 sendBinaryData();
             }
         });
-        byte[] read = viewModel.read();
-        if (read != null) {
-            Log.d(TAG, "read: " + new String(read));
-        }
+//        byte[] read = viewModel.read();
+//        if (read != null) {
+//            Log.d(TAG, "read: " + new String(read));
+//        }
 
     }
 

@@ -33,4 +33,8 @@ public interface Constants {
      * 暂停
      */
     String PAUSE = "Pause";
+    /**
+     * 单价
+     */
+    String UNIT_PRICE = "UnitPrice";
 }

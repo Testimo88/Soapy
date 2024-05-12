@@ -9,6 +9,8 @@ import static com.android.soapy.utils.Constants.PAUSE;
 import static com.android.soapy.utils.Constants.RINSE;
 import static com.android.soapy.utils.Constants.SHAMPOO;
 import static com.android.soapy.utils.Constants.SHAMPOO_SENIOR;
+import static com.android.soapy.utils.Constants.UNIT_PRICE;
+import static com.android.soapy.utils.FragmentUtils.show;
 
 
 import android.app.AlertDialog;
@@ -64,9 +66,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, MainViewMode
         super.initView();
         initShardKey();
         binding.tvStart.setOnClickListener(view -> startNext());
-        binding.videoView.setUp("https://v-cdn.zjol.com.cn/280443.mp4"
-                , "");
-
+//        binding.videoView.setUp("https://v-cdn.zjol.com.cn/280443.mp4"
+//                , "");
+        binding.binaryControlView.setBinaryData("01101",new String[]{"Shampoo1","Shampoo2","Conditioner1","Conditioner2","Disinfectant"});
     }
 
     @Override
@@ -86,6 +88,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, MainViewMode
             SPUtils.put(getContext(), BLOW, "6");
             SPUtils.put(getContext(), DISINFECT, "7");
             SPUtils.put(getContext(), PAUSE, "8");
+            SPUtils.put(getContext(), UNIT_PRICE, "1");
         }
     }
 
@@ -153,7 +156,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, MainViewMode
     }
 
     private void startNext() {
-        viewModel.calMoney(0);
-        viewModel.jumpToNext(this, R.id.fr_container, new StepOneFragment());
+        if (ModbusManager.get().isModbusOpened()) {
+            viewModel.calMoney(0);
+            viewModel.jumpToNext(this, R.id.fr_container, new StepOneFragment());
+        }else {
+            Toast.makeText(context, "Communication malfunction! Please restart the device", Toast.LENGTH_LONG).show();
+        }
     }
 }

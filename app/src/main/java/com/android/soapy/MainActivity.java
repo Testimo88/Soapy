@@ -41,6 +41,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel.initContext(context);
 //        Lztek.create(this).showNavigationBar();
         viewModel.openEfDev();
         viewModel.readHardwareConfig();

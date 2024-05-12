@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -74,7 +75,7 @@ public class CustomLayout extends LinearLayout {
                     String key = editText.getTag().toString();
                     // 保存EditText的内容到SharedPreferences
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(key, editText.getText().toString());
+                    editor.putString(key, editText.getText().toString().trim());
                     editor.apply();
                 } else {
                     // 编辑操作
@@ -88,9 +89,13 @@ public class CustomLayout extends LinearLayout {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomLayout);
             String textViewText = typedArray.getString(R.styleable.CustomLayout_textViewText);
             String sharedKey = typedArray.getString(R.styleable.CustomLayout_sharedKey);
+            int integer = typedArray.getInteger(R.styleable.CustomLayout_editTextType, 0);
             typedArray.recycle();
             textView.setText(textViewText);
             editText.setTag(sharedKey);
+            if (integer>0){
+                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
+            }
             String etValue = sharedPreferences.getString(sharedKey, "");
             editText.setText(etValue);
         }
